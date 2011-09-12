@@ -8,12 +8,10 @@ It modifies the input elements by wrapping them in a container that holds the in
 ### HTML
 ``` html
 <input type="text" id="firstName" name="firstName" placeholder="Mike" />
-```
 
-Gets converted to:
-``` html
+<!-- Gets converted to: -->
 <span class="input-holder">
-  <input type="text" id="firstName" name="firstName">
+  <input type="text" id="firstName" name="firstName" />
   <span class="input-default">Mike</span>
 </span>
 ```
