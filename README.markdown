@@ -36,3 +36,10 @@ Since input-holder and input-default classes are added to the span tags you can 
   left: 5px;
 }
 ```
+
+### Options
+``` js
+$('input').placeholder({
+  clearOnFocus: true //default: false. When enabled, it will clear the text when the element is focused on
+});
+```

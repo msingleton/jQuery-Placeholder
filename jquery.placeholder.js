@@ -1,8 +1,9 @@
 (function($) {
-  $.fn.placeholder = function() {
+  $.fn.placeholder = function(options) {
     return this.each(function() {
       var $this = $(this);
       var placeholder = $this.attr('placeholder');
+      var clearOnFocus = (options && options['clearOnFocus']) || false;
 
       // If we find a placeholder attribute on the element
       if(placeholder != undefined && placeholder != '') {
@@ -19,15 +20,23 @@
         // Pass clicks on the placeholder text through to the input
         inputDefault.click(function() { $this.focus(); });
 
-        // Hide if it's not the delete, tab or shift keys
-        $this.keydown(function(event) {
-          if(event.keyCode != '8' && event.keyCode != '9' && event.keyCode != '16') { inputDefault.hide(); }
-        });
+        if(clearOnFocus) {
+          $this.focus(function(event) {
+            inputDefault.hide();
+          });
 
-        // Show if the field is empty
-        $this.keyup(function(event) {
-          if($this.val().length == 0) { inputDefault.show(); }
-        });
+          $this.blur(function(event) {
+            if($this.val().length == 0) { inputDefault.show(); }
+          });
+        } else {
+          $this.keydown(function(event) {
+            if(event.keyCode != '8' && event.keyCode != '9' && event.keyCode != '16') { inputDefault.hide(); }
+          });
+
+          $this.keyup(function(event) {
+            if($this.val().length == 0) { inputDefault.show(); }
+          });
+        }
       }
     });
   };
