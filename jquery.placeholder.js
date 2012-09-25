@@ -20,23 +20,29 @@
         // Pass clicks on the placeholder text through to the input
         inputDefault.click(function() { $this.focus(); });
 
+        var updateDisplay = function() {
+          if($this.val().length == 0) {
+            inputDefault.show();
+          } else {
+            inputDefault.hide();
+          }
+        };
+
         if(clearOnFocus) {
           $this.focus(function(event) {
             inputDefault.hide();
           });
 
-          $this.blur(function(event) {
-            if($this.val().length == 0) { inputDefault.show(); }
-          });
+          $this.blur(updateDisplay);
         } else {
           $this.keydown(function(event) {
-            if(event.keyCode != '8' && event.keyCode != '9' && event.keyCode != '16') { inputDefault.hide(); }
+            if(event.keyCode != '8' && event.keyCode != '9' && event.keyCode != '16') { updateDisplay(); }
           });
 
-          $this.keyup(function(event) {
-            if($this.val().length == 0) { inputDefault.show(); }
-          });
+          $this.keyup(updateDisplay);
         }
+
+        $this.change(updateDisplay);
       }
     });
   };
