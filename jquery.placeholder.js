@@ -28,6 +28,9 @@
           }
         };
 
+        // Hide placeholder if there is text in the input field
+        updateDisplay();
+
         if (clearOnFocus) {
           $this.focus(function(event) {
             inputDefault.hide();
