@@ -6,7 +6,7 @@
       var clearOnFocus = (options && options['clearOnFocus']) || false;
 
       // If we find a placeholder attribute on the element
-      if (placeholder != undefined && placeholder != '') {
+      if (placeholder) {
         // Remove the placeholder attribute
         $this.removeAttr('placeholder');
 
