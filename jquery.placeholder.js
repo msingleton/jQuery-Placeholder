@@ -6,7 +6,7 @@
       var clearOnFocus = (options && options['clearOnFocus']) || false;
 
       // If we find a placeholder attribute on the element
-      if(placeholder != undefined && placeholder != '') {
+      if (placeholder) {
         // Remove the placeholder attribute
         $this.removeAttr('placeholder');
 
@@ -21,14 +21,17 @@
         inputDefault.click(function() { $this.focus(); });
 
         var updateDisplay = function() {
-          if($this.val().length == 0) {
+          if ($this.val().length === 0) {
             inputDefault.show();
           } else {
             inputDefault.hide();
           }
         };
 
-        if(clearOnFocus) {
+        // Hide placeholder if there is text in the input field
+        updateDisplay();
+
+        if (clearOnFocus) {
           $this.focus(function(event) {
             inputDefault.hide();
           });
@@ -36,7 +39,9 @@
           $this.blur(updateDisplay);
         } else {
           $this.keydown(function(event) {
-            if(event.keyCode != '8' && event.keyCode != '9' && event.keyCode != '16') { updateDisplay(); }
+            if (event.keyCode !== '8' && event.keyCode !== '9' && event.keyCode !== '16') {
+                updateDisplay();
+            }
           });
 
           $this.keyup(updateDisplay);
